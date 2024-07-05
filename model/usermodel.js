@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 //......UserSchema........//
 
 const userSchema = new mongoose.Schema({
-    username: {
+    userName: {
         type: String,
         required: [true, "Username required"],
         minlength: [3, "Username must contain atleast 3 characters"],
@@ -26,12 +26,12 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please provide a password"],
         minlength: [8, "Password must contain atleast 8 characters"],
         maxlength: [32, "Password cannot exceed 32 characters"],
+        select: false
     },
     role: {
-        type: Boolean,
-        required: true,
+        type: String,
         enum: ["Job Seeker", "Employer"],
-        default: false,
+        default: "Job Seeker",
     },
     createdAt: {
         type: Date,
@@ -66,3 +66,5 @@ userSchema.methods.generateToken = async function(){
         expiresIn: process.env.JWT_EXPIRE,
     });
 } ;
+
+export const User = mongoose.model("User", userSchema);
