@@ -1,8 +1,8 @@
-import { catcheAsyncError } from "../middleware/catchAsyncError.js";
+import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import ErrorHandler from "../middleware/error.js";
 import { Job } from "../model/JobModel.js";
 
-export const getAllJobs = catcheAsyncError(async (req, res, next) => {
+export const getAllJobs = catchAsyncError(async (req, res, next) => {
     const jobs = await Job.find({ expired: false });
     res.status(200)
         .json({
@@ -11,7 +11,7 @@ export const getAllJobs = catcheAsyncError(async (req, res, next) => {
         });
 });
 
-export const postJobs = catcheAsyncError(async (req, res, next) => {
+export const postJobs = catchAsyncError(async (req, res, next) => {
     const { role } = req.user;
     if (role === "Job Seeker") {
         return next(new ErrorHandler("Your role is not Compaitable", 400));
@@ -53,7 +53,7 @@ export const postJobs = catcheAsyncError(async (req, res, next) => {
     });
 });
 
-export const getMyJobs = catcheAsyncError(async (req, res, next) => {
+export const getMyJobs = catchAsyncError(async (req, res, next) => {
     const { role } = req.user;
     if (role === "Job Seeker") {
         return next(new ErrorHandler("Your role is not Compaitable", 400));
@@ -66,7 +66,7 @@ export const getMyJobs = catcheAsyncError(async (req, res, next) => {
         });
 });
 
-export const updateJob = catcheAsyncError(async (req, res, next) => {
+export const updateJob = catchAsyncError(async (req, res, next) => {
     const { role } = req.user;
     if (role === "Job Seeker") {
         return next(new ErrorHandler("Your role is not Compaitable", 400));
@@ -88,7 +88,7 @@ export const updateJob = catcheAsyncError(async (req, res, next) => {
     });
 });
 
-export const deleteJob = catcheAsyncError(async (req, res, next) => {
+export const deleteJob = catchAsyncError(async (req, res, next) => {
     const { role } = req.user;
     if (role === "Job Seeker") {
         return next(new ErrorHandler("Your role is not Compaitable", 400));

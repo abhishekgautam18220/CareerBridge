@@ -1,11 +1,11 @@
-import { catcheAsyncError } from "../middleware/catchAsyncError.js";
+import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import ErrorHandler from "../middleware/error.js";
 import { User } from "../model/usermodel.js";
 import { sendToken } from "../utils/jwtToken.js";
 
 //........REGISTER HERE.........//
 
-export const register = catcheAsyncError(async (req, res, next) => {
+export const register = catchAsyncError(async (req, res, next) => {
     const {
         userName,
         email,
@@ -33,7 +33,7 @@ export const register = catcheAsyncError(async (req, res, next) => {
 
 //........LOGIN HERE.........//
 
-export const login = catcheAsyncError(async (req, res, next) => {
+export const login = catchAsyncError(async (req, res, next) => {
     const { email,
         password,
         role,
@@ -56,7 +56,7 @@ export const login = catcheAsyncError(async (req, res, next) => {
 
 //........LOG OUT..........//
 
-export const logout = catcheAsyncError(async (req, res, next) => {
+export const logout = catchAsyncError(async (req, res, next) => {
     res
         .status(201)
         .cookie("token", "", {
@@ -66,5 +66,13 @@ export const logout = catcheAsyncError(async (req, res, next) => {
         .json({
             success: true,
             message: "Logged Out"
-        })
-})
+        });
+});
+
+export const getUser = catchAsyncError(async(req, res, next)=>{
+    const user = req.user;
+    res.status(200).json({
+        success:true,
+        user,
+    });
+});
