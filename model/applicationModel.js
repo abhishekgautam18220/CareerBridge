@@ -17,6 +17,10 @@ export const applicationSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide your coverlLetter"]
     },
+    address: {
+        type: String,
+        required: [true, "Please provide your address"]
+    },
     phone: {
         type: String,
         required: [true, "Phone number required "]

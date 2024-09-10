@@ -10,7 +10,7 @@ const JobSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        minlength: [50, "Description too short (50)"],
+        minlength: [10, "Description too short (50)"],
         maxlength: [1000, "Description too long (1000)"],
     },
     category: {
@@ -20,7 +20,7 @@ const JobSchema = new mongoose.Schema({
     location: {
         type: String,
         required: [true, "Job location is required"],
-        minlength: [20, "Please provide full location"]
+        minlength: [10, "Please provide full location"]
     },
     fixedSalary: {
         type: Number,

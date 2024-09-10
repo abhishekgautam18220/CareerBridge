@@ -73,6 +73,7 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
         name,
         email,
         coverLetter,
+        address,
         phone,
         jobId
     } = req.body;
@@ -92,13 +93,14 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
         user: jobDetails.postedBy,
         role: "Employer"
     }
-    if (!name || !email || !coverLetter || !phone || !applicantId || !employerId || !resume) {
+    if (!name || !email || !coverLetter || !phone || !applicantId || !address || !employerId || !resume) {
         return next(new ErrorHandler("Incomplete details", 400));
     }
     const application = await Application.create({
         name,
         email,
         coverLetter,
+        address,
         phone,
         applicantId,
         employerId,
