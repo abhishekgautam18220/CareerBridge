@@ -6,8 +6,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
-import NavBar from "./components/Layout/Navbar";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Home from "./components/Home/Home";
 import Jobs from "./components/Job/Jobs";
@@ -24,7 +23,7 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/user/getuser",
+          "http://localhost:3100/api/v1/user/getuser",
           {
             withCredentials: true,
           }
@@ -41,7 +40,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <NavBar />
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
